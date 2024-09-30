@@ -1,0 +1,15 @@
+create database bloco_notas_cp;
+use bloco_notas_cp;
+
+create table usuarios (
+id_usuario int primary key auto_increment,
+nome_usuario varchar(50) not null
+);
+
+create table notas (
+id_nota int primary key auto_increment,
+titulo_nota varchar(50) not null,
+texto_nota varchar(10000),
+fk_usuario int,
+foreign key (fk_usuario) references usuarios(id_usuario)
+);
