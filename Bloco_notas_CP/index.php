@@ -1,23 +1,33 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "bloco_notas_cp";
+include 'db.php'; 
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $titulo = $_POST['titulo'];
+    $conteudo = $_POST['conteudo'];
+    $usuario_id = 1; 
 
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+    $stmt = $conn->prepare("INSERT INTO nota (titulo, conteudo, usuario_id) VALUES (?, ?, ?)");
+    $stmt->execute([$titulo, $conteudo, $usuario_id]);
+
+    header('Location: index.php');
+    exit;
 }
 ?>
-
-<html lang="pt-br">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Criar Nova Nota</title>
 </head>
 <body>
-    
+    <h1>Criar Nova Nota</h1>
+    <form method="POST">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+
+        <label for="conteudo">Conteúdo:</label>
+        <textarea id="conteudo" name="conteudo" required></textarea>
+
+        <button type="submit">Salvar</button>
+    </form>  
 </body>
 </html>
