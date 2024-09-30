@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "bloco";
+$dbname = "bloco_notas_cp";
 
 
 try {
